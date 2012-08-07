@@ -22,7 +22,7 @@ import org.rascalmpl.interpreter.env.GlobalEnvironment;
 import org.rascalmpl.interpreter.env.ModuleEnvironment;
 import org.rascalmpl.interpreter.utils.JavaBridge;
 import org.rascalmpl.parser.gtd.IGTD;
-import org.rascalmpl.parser.gtd.result.action.IActionExecutor;
+import org.rascalmpl.parser.gtd.result.action.VoidActionExecutor;
 import org.rascalmpl.parser.gtd.result.out.DefaultNodeFlattener;
 import org.rascalmpl.parser.uptr.UPTRNodeFactory;
 
@@ -68,6 +68,7 @@ public class Bridge2Rascal {
 	
 	public IConstructor parse(INode grammar, String ns, String key, String src, ISourceLocation loc) {
 		IConstructor rascalGrammar = (IConstructor) evaluator.call("node2Grammar", vf.string(ns), vf.string(key), grammar);
+		System.err.println("RascalGrammar: \n" + rascalGrammar);
 		IString start = (IString) ((IConstructor)((ISet)rascalGrammar.get(0)).iterator().next()).get(0);
 		return parse(rascalGrammar, start.getValue(), src, loc);
 	}
@@ -81,7 +82,7 @@ public class Bridge2Rascal {
 		try {
 			IGTD<IConstructor,IConstructor,ISourceLocation> parser = cache.get(grammar).newInstance();
 			return (IConstructor) parser.parse(sort, loc.getURI(),
-					src.toCharArray(), MY_ACTION_EXECUTOR,
+					src.toCharArray(), new VoidActionExecutor<IConstructor>(),
 					new DefaultNodeFlattener<IConstructor, IConstructor, ISourceLocation>(),
 					new UPTRNodeFactory());
 		} catch (InstantiationException e) {
@@ -96,6 +97,7 @@ public class Bridge2Rascal {
 			IString grammarName = makeGrammarName(grammar);
 			IString classString = (IString) evaluator.call(
 					"generateObjectParser", PKG, grammarName, grammar);
+			// TODO: fix this tmp hacking...
 			debugOutput(classString.getValue(), "/tmp/parser.java");
 			return bridge.compileJava(loc.getURI(), PKG.getValue() + "."
 					+ grammarName.getValue(), classString.getValue());
@@ -111,109 +113,6 @@ public class Bridge2Rascal {
 	private IString makeGrammarName(IConstructor grammar) {
 		return vf.string("grammar_" + Math.abs(grammar.hashCode()));
 	}
-
-	private static final IActionExecutor<IConstructor> MY_ACTION_EXECUTOR = new IActionExecutor<IConstructor>() {
-
-		@Override
-		public Object createRootEnvironment() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public void completed(Object environment, boolean filtered) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public Object enteringProduction(Object production, Object parent) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public Object enteringListProduction(Object production, Object parent) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public Object enteringNode(Object production, int index,
-				Object environment) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public Object enteringListNode(Object production, int index,
-				Object environment) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public void exitedProduction(Object production, boolean filtered,
-				Object environment) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void exitedListProduction(Object production, boolean filtered,
-				Object environment) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public IConstructor filterProduction(IConstructor tree,
-				Object environment) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public IConstructor filterListProduction(IConstructor tree,
-				Object environment) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public IConstructor filterAmbiguity(IConstructor ambCluster,
-				Object environment) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public IConstructor filterListAmbiguity(IConstructor ambCluster,
-				Object environment) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public IConstructor filterCycle(IConstructor cycle, Object environment) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public IConstructor filterListCycle(IConstructor cycle,
-				Object environment) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public boolean isImpure(Object rhs) {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-	};
 
 	private void debugOutput(String classString, String file) {
 		FileOutputStream s = null;
