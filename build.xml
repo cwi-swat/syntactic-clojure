@@ -49,6 +49,8 @@
           classpath="${maven.compile.classpath}:${build}:${cljsrc}:${rascal}"
           failonerror="true"
           fork="true">
+      <jvmarg value="-Xmx1024"/>
+
       <sysproperty key="clojure.compile.path" value="${build}"/>
          <!--<sysproperty key="clojure.compiler.elide-meta" value="[:doc :file :line :added]"/>-->
          <!--<sysproperty key="clojure.compiler.disable-locals-clearing" value="true"/>-->

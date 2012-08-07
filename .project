@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>clojure</name>
+	<name>syntactic-clojure</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -14,16 +14,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>classes</name>
-			<type>2</type>
-			<location>/export/scratch1/storm/work/workspace/clojure/target/classes</location>
-		</link>
-		<link>
-			<name>jvm</name>
-			<type>2</type>
-			<location>/export/scratch1/storm/work/workspace/clojure/src/jvm</location>
-		</link>
-	</linkedResources>
 </projectDescription>
