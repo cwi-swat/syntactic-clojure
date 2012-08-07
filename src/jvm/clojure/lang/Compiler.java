@@ -26,6 +26,8 @@ import java.net.URI;
 import java.util.*;
 import java.util.regex.Pattern;
 
+import clojure.lang.ClojureParser;
+
 
 import org.eclipse.imp.pdb.facts.IConstructor;
 import org.eclipse.imp.pdb.facts.IList;
@@ -7009,9 +7011,11 @@ private static Object loadPT(IConstructor[] fileRef, String sourcePath,
 			// only forms, no literals at this level.
 			SyncljLispReader.Pair p = reader.read(form);
 			newArgs.append(p.tree);
-			LINE_AFTER.set(TreeAdapter.getLocation(form).getEndLine());
-			ret = eval(p.obj, false);
-			LINE_BEFORE.set(TreeAdapter.getLocation(form).getBeginLine());
+			if (!SyncljLispReader.isDiscarded(p.obj)) {
+				LINE_AFTER.set(TreeAdapter.getLocation(form).getEndLine());
+				ret = eval(p.obj, false);
+				LINE_BEFORE.set(TreeAdapter.getLocation(form).getBeginLine());
+			}
 			if (i < forms.length() - 2) {
 				i++;
 				newArgs.append(forms.get(i)); // layout
@@ -7150,14 +7154,29 @@ static void compile1(GeneratorAdapter gen, ObjExpr objx, Object form) {
 }
 
 public static Object compile(Reader rdr, String sourcePath, String sourceName) throws IOException{
+	
+	/* Load the complete reader into a UPTR parse-tree */
+	
+	char[] input = convertReader(rdr);
+	IGTD<IConstructor, IConstructor, ISourceLocation> gtd = new ClojureParser();
+	IConstructor file = (IConstructor) gtd
+			.parse(START_SORT,
+					URI.create(sourcePath),
+					input,
+					new DefaultNodeFlattener<IConstructor, IConstructor, ISourceLocation>(),
+					new UPTRNodeFactory());
+	
+	ISourceLocation loc = TreeAdapter.getLocation(file);
+	int lineNumber = loc.getBeginLine();
+
+	
+	
 	if(COMPILE_PATH.deref() == null)
 		throw Util.runtimeException("*compile-path* not set");
 
 	Object EOF = new Object();
 	Object ret = null;
-	LineNumberingPushbackReader pushbackReader =
-			(rdr instanceof LineNumberingPushbackReader) ? (LineNumberingPushbackReader) rdr :
-			new LineNumberingPushbackReader(rdr);
+
 	Var.pushThreadBindings(
 			RT.map(SOURCE_PATH, sourcePath,
 			       SOURCE, sourceName,
@@ -7166,8 +7185,8 @@ public static Object compile(Reader rdr, String sourcePath, String sourceName) t
 					LOOP_LOCALS, null,
 					NEXT_LOCAL_NUM, 0,
 			       RT.CURRENT_NS, RT.CURRENT_NS.deref(),
-			       LINE_BEFORE, pushbackReader.getLineNumber(),
-			       LINE_AFTER, pushbackReader.getLineNumber(),
+			       LINE_BEFORE, lineNumber,
+			       LINE_AFTER, lineNumber,
 			       CONSTANTS, PersistentVector.EMPTY,
 			       CONSTANT_IDS, new IdentityHashMap(),
 			       KEYWORDS, PersistentHashMap.EMPTY,
@@ -7198,13 +7217,68 @@ public static Object compile(Reader rdr, String sourcePath, String sourceName) t
 		                                            cv);
 		gen.visitCode();
 
-		for(Object r = LispReader.read(pushbackReader, false, EOF, false); r != EOF;
-		    r = LispReader.read(pushbackReader, false, EOF, false))
-			{
-				LINE_AFTER.set(pushbackReader.getLineNumber());
-				compile1(gen, objx, r);
-				LINE_BEFORE.set(pushbackReader.getLineNumber());
+		// Reading starts
+		
+		
+//		for(Object r = LispReader.read(pushbackReader, false, EOF, false); r != EOF;
+//		    r = LispReader.read(pushbackReader, false, EOF, false))
+//			{
+//				LINE_AFTER.set(pushbackReader.getLineNumber());
+//				compile1(gen, objx, r);
+//				LINE_BEFORE.set(pushbackReader.getLineNumber());
+//			}
+		
+		
+		SyncljLispReader reader = new SyncljLispReader();
+
+		try {
+
+			if (TreeAdapter.isAmb(file)) {
+				System.err.println("Amb");
 			}
+
+			// File is start[File], so
+			IConstructor file2 = (IConstructor) TreeAdapter.getArgs(file).get(1);
+			IList args = TreeAdapter.getArgs(file2);
+			// Probably only this is the list of forms; don't forget to fix
+			// below.
+			IList forms = TreeAdapter.getArgs((IConstructor) args.get(0));
+
+			
+			
+			IListWriter newArgs = vf.listWriter();
+			for (int i = 0; i < forms.length(); i++) {
+				IConstructor form = (IConstructor) forms.get(i);
+				// only forms, no literals at this level.
+				SyncljLispReader.Pair p = reader.read(form);
+//				System.err.println("Compiling " + sourceName + ": " + p.obj);
+			
+				newArgs.append(p.tree);
+				// TODO: implement iterable for reader.
+				if (!SyncljLispReader.isDiscarded(p.obj)) {
+					LINE_AFTER.set(TreeAdapter.getLocation(form).getEndLine());
+					compile1(gen, objx, p.obj);
+					LINE_BEFORE.set(TreeAdapter.getLocation(form).getBeginLine());
+				}
+				if (i < forms.length() - 2) {
+					i++;
+					newArgs.append(forms.get(i)); // layout
+				}
+//				System.err.println("Success");
+			}
+			// Fix tree
+			file2 = file2.set("args", newArgs.done());
+			file = file.set("args", vf.list(TreeAdapter.getArgs(file).get(0),
+					file2, TreeAdapter.getArgs(file).get(2)));
+
+		} catch (SyncljLispReader.ReaderException e) {
+			throw new CompilerException(sourcePath, e.line, e.getCause());
+		}
+		
+		
+		// Reading ends
+		
+		
 		//end of load
 		gen.returnValue();
 		gen.endMethod();

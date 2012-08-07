@@ -75,7 +75,7 @@ public class SyncljLispReader extends clojure.lang.LispReader {
 	
 	private Object error(String message, ISourceLocation loc) {
 		recordError(message, loc);
-		throw new ReaderException(loc.getBeginLine(), message);
+		throw new LispReader.ReaderException(loc.getBeginLine(), new RuntimeException(message));
 	}
 
 	private void recordError(String message, ISourceLocation loc) {
@@ -85,8 +85,7 @@ public class SyncljLispReader extends clojure.lang.LispReader {
 
 	public Pair read(IConstructor tree) {
 		if (TreeAdapter.isAmb(tree)) {
-			error("Ambiguous tree: >" + tree + "<, \"" + TreeAdapter.yield(tree) + "\"", tree);
-			return new Pair(tree, null);
+			throw new AssertionError("Ambiguous tree: >" + tree + "<, \"" + TreeAdapter.yield(tree) + "\"");
 		}
 		if (FormAdapter.isNumber(tree)) {
 			return new Pair(tree, matchNumber(TreeAdapter.yield(tree)));
@@ -300,6 +299,7 @@ public class SyncljLispReader extends clojure.lang.LispReader {
 		
 		IConstructor embedding = (IConstructor) args.get(2);
 		String src = TreeAdapter.yield(embedding);
+		System.err.println("Parsing >>>" + src + "<<<");
 		ISourceLocation embeddingLoc = TreeAdapter.getLocation(embedding);
 		
 		try {
@@ -433,7 +433,6 @@ public class SyncljLispReader extends clojure.lang.LispReader {
 		IConstructor pt = (IConstructor) parser.parse("EBNF", loc.getURI(), src.toCharArray(), 
 				new DefaultNodeFlattener<IConstructor, IConstructor, ISourceLocation>(),
 				new UPTRNodeFactory());
-		System.err.println(pt);
 		return pt;
 	}
 	
@@ -1006,15 +1005,19 @@ public class SyncljLispReader extends clojure.lang.LispReader {
 		}
 		return null;
 	}
+//
+//	@SuppressWarnings("serial")
+//	public class ReaderException extends RuntimeException {
+//		final int line;
+//
+//		public ReaderException(int line, String message) {
+//			super(message);
+//			this.line = line;
+//		}
+//	}
 
-	@SuppressWarnings("serial")
-	public class ReaderException extends RuntimeException {
-		final int line;
-
-		public ReaderException(int line, String message) {
-			super(message);
-			this.line = line;
-		}
+	public static boolean isDiscarded(Object obj) {
+		return obj == DISCARD;
 	}
 
 }
