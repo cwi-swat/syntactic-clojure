@@ -17,12 +17,26 @@ package clojure.lang;
 import clojure.asm.*;
 import clojure.asm.commons.GeneratorAdapter;
 import clojure.asm.commons.Method;
+import clojure.lang.SyncljLispReader;
 
 import java.io.*;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
+import java.net.URI;
 import java.util.*;
 import java.util.regex.Pattern;
+
+
+import org.eclipse.imp.pdb.facts.IConstructor;
+import org.eclipse.imp.pdb.facts.IList;
+import org.eclipse.imp.pdb.facts.IListWriter;
+import org.eclipse.imp.pdb.facts.ISourceLocation;
+import org.eclipse.imp.pdb.facts.IValueFactory;
+import org.rascalmpl.parser.gtd.IGTD;
+import org.rascalmpl.parser.gtd.result.out.DefaultNodeFlattener;
+import org.rascalmpl.parser.uptr.UPTRNodeFactory;
+import org.rascalmpl.values.ValueFactoryFactory;
+import org.rascalmpl.values.uptr.TreeAdapter;
 
 //*/
 /*
@@ -35,6 +49,11 @@ import org.objectweb.asm.util.CheckClassAdapter;
 //*/
 
 public class Compiler implements Opcodes{
+	
+	private static final String START_SORT = "start__File";
+
+	private static final IValueFactory vf = ValueFactoryFactory.getValueFactory();
+
 
 static final Symbol DEF = Symbol.intern("def");
 static final Symbol LOOP = Symbol.intern("loop*");
@@ -6923,46 +6942,134 @@ public static Object load(Reader rdr) {
 }
 
 public static Object load(Reader rdr, String sourcePath, String sourceName) {
-	Object EOF = new Object();
-	Object ret = null;
-	LineNumberingPushbackReader pushbackReader =
-			(rdr instanceof LineNumberingPushbackReader) ? (LineNumberingPushbackReader) rdr :
-			new LineNumberingPushbackReader(rdr);
-	Var.pushThreadBindings(
-			RT.map(LOADER, RT.makeClassLoader(),
-			       SOURCE_PATH, sourcePath,
-			       SOURCE, sourceName,
-			       METHOD, null,
-			       LOCAL_ENV, null,
-					LOOP_LOCALS, null,
-					NEXT_LOCAL_NUM, 0,
-			       RT.CURRENT_NS, RT.CURRENT_NS.deref(),
-			       LINE_BEFORE, pushbackReader.getLineNumber(),
-			       LINE_AFTER, pushbackReader.getLineNumber()
-			       ,RT.UNCHECKED_MATH, RT.UNCHECKED_MATH.deref()
-					,RT.WARN_ON_REFLECTION, RT.WARN_ON_REFLECTION.deref()
-			       ,RT.DATA_READERS, RT.DATA_READERS.deref()
-                        ));
+	return loadWithRascal(rdr, sourcePath, sourceName);
+}
 
-	try
-		{
-		for(Object r = LispReader.read(pushbackReader, false, EOF, false); r != EOF;
-		    r = LispReader.read(pushbackReader, false, EOF, false))
-			{
-			LINE_AFTER.set(pushbackReader.getLineNumber());
-			ret = eval(r,false);
-			LINE_BEFORE.set(pushbackReader.getLineNumber());
+private static Object loadWithRascal(Reader rdr, String sourcePath,
+		String sourceName) {
+	char[] input = convertReader(rdr);
+	return loadFromChars(input, sourcePath, sourceName);
+}
+
+private static Object loadFromChars(char[] input, String sourcePath,
+		String sourceName) {
+	IGTD<IConstructor, IConstructor, ISourceLocation> gtd = new ClojureParser();
+	IConstructor file = (IConstructor) gtd
+			.parse(START_SORT,
+					URI.create(sourcePath),
+					input,
+					new DefaultNodeFlattener<IConstructor, IConstructor, ISourceLocation>(),
+					new UPTRNodeFactory());
+	return loadPT(new IConstructor[] { file }, sourcePath, sourceName);
+	// catch (ParseError e) {
+	// throw RuntimeExceptionFactory.parseError(
+	// vf.sourceLocation(e.getLocation(),
+	// e.getOffset(), e.getLength(), e.getBeginLine(), e.getEndLine(),
+	// e.getBeginColumn(), e.getEndColumn()), null,
+	// Arrays.toString(e.getStackTrace()));
+	// }
+}
+
+private static Object loadPT(IConstructor[] fileRef, String sourcePath,
+		String sourceName) {
+	IConstructor file = fileRef[0];
+	ISourceLocation loc = TreeAdapter.getLocation(file);
+	int lineNumber = loc.getBeginLine();
+
+	Object ret = null;
+
+	Var.pushThreadBindings(RT.map(LOADER, RT.makeClassLoader(),
+			SOURCE_PATH, sourcePath, SOURCE, sourceName, METHOD, null,
+			LOCAL_ENV, null, LOOP_LOCALS, null, NEXT_LOCAL_NUM, 0,
+			RT.CURRENT_NS, RT.CURRENT_NS.deref(), LINE_BEFORE, lineNumber,
+			LINE_AFTER, lineNumber, RT.UNCHECKED_MATH,
+			RT.UNCHECKED_MATH.deref(), RT.WARN_ON_REFLECTION,
+			RT.WARN_ON_REFLECTION.deref(), RT.DATA_READERS,
+			RT.DATA_READERS.deref()));
+
+	SyncljLispReader reader = new SyncljLispReader();
+
+	try {
+
+		if (TreeAdapter.isAmb(file)) {
+			System.err.println("Amb");
+		}
+
+		// File is start[File], so
+		IConstructor file2 = (IConstructor) TreeAdapter.getArgs(file)
+				.get(1);
+		IList args = TreeAdapter.getArgs(file2);
+		// Probably only this is the list of forms; don't forget to fix
+		// below.
+		IList forms = TreeAdapter.getArgs((IConstructor) args.get(0));
+
+		IListWriter newArgs = vf.listWriter();
+		for (int i = 0; i < forms.length(); i++) {
+			IConstructor form = (IConstructor) forms.get(i);
+			// only forms, no literals at this level.
+			SyncljLispReader.Pair p = reader.read(form);
+			newArgs.append(p.tree);
+			LINE_AFTER.set(TreeAdapter.getLocation(form).getEndLine());
+			ret = eval(p.obj, false);
+			LINE_BEFORE.set(TreeAdapter.getLocation(form).getBeginLine());
+			if (i < forms.length() - 2) {
+				i++;
+				newArgs.append(forms.get(i)); // layout
 			}
 		}
-	catch(LispReader.ReaderException e)
-		{
+		// Fix tree
+		file2 = file2.set("args", newArgs.done());
+		file = file.set("args", vf.list(TreeAdapter.getArgs(file).get(0),
+				file2, TreeAdapter.getArgs(file).get(2)));
+
+	} catch (SyncljLispReader.ReaderException e) {
 		throw new CompilerException(sourcePath, e.line, e.getCause());
-		}
-	finally
-		{
+	} finally {
 		Var.popThreadBindings();
-		}
+	}
+	fileRef[0] = file;
 	return ret;
+}
+
+// Copied from Rascal's InputConverter
+private final static int STREAM_READ_SEGMENT_SIZE = 8192;
+
+private static char[] convertReader(Reader reader) {
+	ArrayList<char[]> segments = new ArrayList<char[]>();
+
+	// Gather segments.
+	int nrOfWholeSegments = -1;
+	int bytesRead;
+	do {
+		char[] segment = new char[STREAM_READ_SEGMENT_SIZE];
+		try {
+			bytesRead = reader.read(segment, 0, STREAM_READ_SEGMENT_SIZE);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+
+		segments.add(segment);
+		++nrOfWholeSegments;
+	} while (bytesRead == STREAM_READ_SEGMENT_SIZE);
+
+	// Glue the segments together.
+	char[] segment = segments.get(nrOfWholeSegments);
+	char[] input;
+	if (bytesRead != -1) {
+		input = new char[(nrOfWholeSegments * STREAM_READ_SEGMENT_SIZE)
+				+ bytesRead];
+		System.arraycopy(segment, 0, input,
+				(nrOfWholeSegments * STREAM_READ_SEGMENT_SIZE), bytesRead);
+	} else {
+		input = new char[(nrOfWholeSegments * STREAM_READ_SEGMENT_SIZE)];
+	}
+	for (int i = nrOfWholeSegments - 1; i >= 0; --i) {
+		segment = segments.get(i);
+		System.arraycopy(segment, 0, input, (i * STREAM_READ_SEGMENT_SIZE),
+				STREAM_READ_SEGMENT_SIZE);
+	}
+
+	return input;
 }
 
 static public void writeClassFile(String internalName, byte[] bytecode) throws IOException{

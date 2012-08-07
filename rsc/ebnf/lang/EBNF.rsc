@@ -1,0 +1,60 @@
+module ebnf::lang::EBNF
+
+extend clojure::lang::Layout;
+extend clojure::lang::Tokens;
+
+syntax EBNF
+  = grammar: "grammar" Rule* // always one, for start symbol
+  ;
+
+syntax Rule
+  = rule: Symbol "=" {Alt "|"}*
+  ;
+
+syntax Alt
+  = alt: Symbol Exp* Hints? // ident is the cons attribute
+  ;
+
+syntax Hints
+  = hints: "(" Hint* ")"
+  ;
+  
+syntax Hint
+  = class: "class" Symbol
+  | folding: "folding"
+  ; 
+
+  
+syntax Exp
+  = literal: String
+  | call: Symbol \ Tokens
+  | optional: "[" Exp "]"
+  | repeat: "{" Exp "}" 
+  | repeatSep: "{" Exp String "}"
+  | string: "string"
+  | integer: "integer"
+  | number: "number"
+  | float: "float"
+  | rational: "rational"
+  | char: "char"
+  | keyword: "keyword"
+  | regexp: "regexp"
+  | symbol: "symbol"
+  | form: "form" // escape to clojure
+  ;
+
+keyword Tokens 
+  = "string"
+  | "integer"
+  | "number"
+  | "float"
+  | "rational"
+  | "char"
+  | "keyword"
+  | "regexp"
+  | "symbol"
+  | "form"
+  | "grammar"
+  | "|" 
+  | "=";
+
