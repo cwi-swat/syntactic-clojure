@@ -3,6 +3,8 @@
 	<classpathentry kind="src" path="rsc"/>
 	<classpathentry kind="src" path="src/jvm"/>
 	<classpathentry kind="var" path="JRE_LIB" sourcepath="JRE_SRC"/>
-	<classpathentry kind="lib" path="lib/rascal.jar"/>
+	<classpathentry exported="true" kind="lib" path="target/classes/"/>
+	<classpathentry exported="true" kind="lib" path="lib/rascal.jar"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>
