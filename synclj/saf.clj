@@ -1,0 +1,11 @@
+
+
+(deffighter chicken
+  kickReach  = 9
+  punchReach = 1
+  kickPower  = 2
+  punchPower = 2
+  far [run_towards kick_low]
+  near [run_away kick_low]
+  near [crouch punch_low]
+)
