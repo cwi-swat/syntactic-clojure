@@ -44,7 +44,7 @@ public class SyncljLispReader extends clojure.lang.LispReader {
 	private static final Object DISCARD = new Object();
 	private static final IValueFactory vf = ValueFactoryFactory.getValueFactory();
 	
-	private static final Bridge2Rascal bridge = new Bridge2Rascal(vf);
+	public static Bridge2Rascal bridge = new Bridge2Rascal(vf);
 	
 	// TODO: unreadable reader (?), eval reader, data readers, ctor reader, record
 	

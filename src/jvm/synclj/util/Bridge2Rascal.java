@@ -33,7 +33,12 @@ public class Bridge2Rascal {
 	private final IValueFactory vf;
 	private final Map<IConstructor, Class<IGTD<IConstructor,IConstructor,ISourceLocation>>> cache;
 
+	
 	public Bridge2Rascal(IValueFactory values) {
+		this(values, URI.create("file://" + System.getProperty("user.dir") + "/src"));
+	}
+	
+	public Bridge2Rascal(IValueFactory values, URI uri) {
 		PKG = values.string("lang.synclj.object.parsers");
 		cache = new HashMap<IConstructor, Class<IGTD<IConstructor,IConstructor,ISourceLocation>>>();
 		vf = values;
@@ -45,17 +50,8 @@ public class Bridge2Rascal {
 		this.bridge = new JavaBridge(evaluator.getClassLoaders(), values);
 		IRascalMonitor monitor = this.evaluator;
 		monitor.startJob("Loading parser generator", 100, 139);
-		// TODO: fix this; should be generically usable. Not just from this project.
-		String wd = System.getProperty("user.dir");
-//		if (!wd.endsWith("syntactic-clojure")) {
-//			// If running from eclipse rascal, wd is the startup dir of eclipse
-//			// we, for now (:-S), assume that eclipse was started one dir up
-//			// from the workspace where our project resides. UGH!
-//			wd = wd + "/workspace/syntactic-clojure";
-//		}
-		
-		
-		evaluator.addRascalSearchPath(URI.create("file://" + wd + "/src"));
+
+		evaluator.addRascalSearchPath(uri);
 		try {
 			evaluator.doImport(monitor, "lang::rascal::grammar::ParserGenerator");
 			evaluator.doImport(monitor, "ebnf::lang::NodeToGrammar");
