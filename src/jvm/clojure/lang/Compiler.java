@@ -6953,6 +6953,20 @@ private static Object loadWithRascal(Reader rdr, String sourcePath,
 	return loadFromChars(input, sourcePath, sourceName);
 }
 
+public static IConstructor parseString(String input, String sourcePath,
+		String sourceName) {
+	IGTD<IConstructor, IConstructor, ISourceLocation> gtd = new ClojureParser();
+	IConstructor file = (IConstructor) gtd
+			.parse(START_SORT,
+					URI.create(sourcePath),
+					input.toCharArray(),
+					new DefaultNodeFlattener<IConstructor, IConstructor, ISourceLocation>(),
+					new UPTRNodeFactory());
+	IConstructor[] ref = new IConstructor[] { file };
+	loadPT(ref, sourcePath, sourceName);
+	return ref[0];
+}
+
 private static Object loadFromChars(char[] input, String sourcePath,
 		String sourceName) {
 	IGTD<IConstructor, IConstructor, ISourceLocation> gtd = new ClojureParser();
@@ -6971,8 +6985,7 @@ private static Object loadFromChars(char[] input, String sourcePath,
 	// Arrays.toString(e.getStackTrace()));
 	// }
 }
-
-private static Object loadPT(IConstructor[] fileRef, String sourcePath,
+public static Object loadPT(IConstructor[] fileRef, String sourcePath,
 		String sourceName) {
 	IConstructor file = fileRef[0];
 	ISourceLocation loc = TreeAdapter.getLocation(file);
