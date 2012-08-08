@@ -53,7 +53,9 @@ public class Bridge2Rascal {
 //			// from the workspace where our project resides. UGH!
 //			wd = wd + "/workspace/syntactic-clojure";
 //		}
-		evaluator.addRascalSearchPath(URI.create("file://" + wd + "/rsc"));
+		
+		
+		evaluator.addRascalSearchPath(URI.create("file://" + wd + "/src"));
 		try {
 			evaluator.doImport(monitor, "lang::rascal::grammar::ParserGenerator");
 			evaluator.doImport(monitor, "ebnf::lang::NodeToGrammar");

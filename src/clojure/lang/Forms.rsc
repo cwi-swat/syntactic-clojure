@@ -4,13 +4,13 @@ extend clojure::lang::Layout;
 extend clojure::lang::Tokens;
 
 syntax Form
-  = string: String
-  | regexp: RegExp
-  | char: Char
-  | number: Number
+  = @category="String" string: String
+  | @category="RegExp" regexp: RegExp
+  | @category="Char" char: Char
+  | @category="Number" number: Number
+  | @category="Symbol" symbol: Symbol
   | arg: Arg
   | meta: ("#^"|"^") Form meta Form arg
-  | symbol: Symbol
   | \list: "(" Form* ")" 
   | vector: "[" Form* "]"
   | \map: "{" Form* "}"

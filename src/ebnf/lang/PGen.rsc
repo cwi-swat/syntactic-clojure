@@ -9,7 +9,7 @@ import IO;
 
 public void generateEBNFParser() {
   name = "EBNFParser";
-  src = generateObjectParser("lang.synclj.meta", name , grammar({sort("EBNF")}, (#EBNF).definitions));
-  writeFile(|project://clojure/jvm/ebnf/lang/<name>.java|, src);
+  src = generateObjectParser("ebnf.lang", name , grammar({sort("EBNF")}, (#EBNF).definitions));
+  writeFile(|project://syntactic-clojure/src/jvm/ebnf/lang/<name>.java|, src);
 }
 

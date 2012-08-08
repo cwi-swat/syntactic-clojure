@@ -81,23 +81,19 @@ public class ClojureParser extends org.rascalmpl.library.lang.rascal.syntax.Rasc
   private static final IConstructor prod__Char__char_class___range__92_92_lit_formfeed_ = (IConstructor) _read("prod(lex(\"Char\"),[\\char-class([range(92,92)]),lit(\"formfeed\")],{})", Factory.Production);
   private static final IConstructor prod__Stem__seq___conditional__char_class___range__45_45__not_precede__char_class___range__33_33_range__35_36_range__38_38_range__42_43_range__45_46_range__48_57_range__60_63_range__65_90_range__95_95_range__97_122_range__124_124_iter_star__char_class___range__33_33_range__35_36_range__38_38_range__42_43_range__45_46_range__48_57_range__60_63_range__65_90_range__95_95_range__97_122_range__124_124_char_class___range__33_33_range__35_36_range__38_38_range__42_43_range__46_46_range__48_57_range__60_63_range__65_90_range__95_95_range__97_122_range__124_124_iter_star__char_class___range__33_33_range__35_36_range__38_38_range__42_43_range__45_46_range__48_57_range__60_63_range__65_90_range__95_95_range__97_122_range__124_124_conditional__iter__char_class___range__39_39__not_follow__char_class___range__39_39_ = (IConstructor) _read("prod(lex(\"Stem\"),[seq([conditional(\\char-class([range(45,45)]),{\\not-precede(\\char-class([range(33,33),range(35,36),range(38,38),range(42,43),range(45,46),range(48,57),range(60,63),range(65,90),range(95,95),range(97,122),range(124,124)]))}),\\iter-star(\\char-class([range(33,33),range(35,36),range(38,38),range(42,43),range(45,46),range(48,57),range(60,63),range(65,90),range(95,95),range(97,122),range(124,124)])),\\char-class([range(33,33),range(35,36),range(38,38),range(42,43),range(46,46),range(48,57),range(60,63),range(65,90),range(95,95),range(97,122),range(124,124)]),\\iter-star(\\char-class([range(33,33),range(35,36),range(38,38),range(42,43),range(45,46),range(48,57),range(60,63),range(65,90),range(95,95),range(97,122),range(124,124)])),conditional(iter(\\char-class([range(39,39)])),{\\not-follow(\\char-class([range(39,39)]))})])],{})", Factory.Production);
   private static final IConstructor regular__alt___lit___35_94_lit___94 = (IConstructor) _read("regular(alt({lit(\"#^\"),lit(\"^\")}))", Factory.Production);
-  private static final IConstructor prod__string_Form__String_ = (IConstructor) _read("prod(label(\"string\",sort(\"Form\")),[lex(\"String\")],{})", Factory.Production);
   private static final IConstructor prod__lit_space__char_class___range__115_115_char_class___range__112_112_char_class___range__97_97_char_class___range__99_99_char_class___range__101_101_ = (IConstructor) _read("prod(lit(\"space\"),[\\char-class([range(115,115)]),\\char-class([range(112,112)]),\\char-class([range(97,97)]),\\char-class([range(99,99)]),\\char-class([range(101,101)])],{})", Factory.Production);
   private static final IConstructor regular__seq___char_class___range__92_92_char_class___range__34_34 = (IConstructor) _read("regular(seq([\\char-class([range(92,92)]),\\char-class([range(34,34)])]))", Factory.Production);
-  private static final IConstructor prod__number_Form__Number_ = (IConstructor) _read("prod(label(\"number\",sort(\"Form\")),[lex(\"Number\")],{})", Factory.Production);
   private static final IConstructor prod__Char__char_class___range__92_92_lit_space_ = (IConstructor) _read("prod(lex(\"Char\"),[\\char-class([range(92,92)]),lit(\"space\")],{})", Factory.Production);
   private static final IConstructor prod__var_Form__lit___35_39_layouts_Standard_Form_ = (IConstructor) _read("prod(label(\"var\",sort(\"Form\")),[lit(\"#\\'\\\\\"),layouts(\"Standard\"),sort(\"Form\")],{})", Factory.Production);
   private static final IConstructor prod__Comment__lit___59_conditional__iter_star__char_class___range__0_9_range__11_12_range__14_16777215__end_of_line__tag__category___67_111_109_109_101_110_116 = (IConstructor) _read("prod(lex(\"Comment\"),[lit(\";\"),conditional(\\iter-star(\\char-class([range(0,9),range(11,12),range(14,16777215)])),{\\end-of-line()})],{tag(category(\"Comment\"))})", Factory.Production);
   private static final IConstructor prod__whitespace_WhitespaceOrComment__Whitespace_ = (IConstructor) _read("prod(label(\"whitespace\",sort(\"WhitespaceOrComment\")),[lex(\"Whitespace\")],{})", Factory.Production);
   private static final IConstructor prod__Ratio__opt__char_class___range__43_43_range__45_45_iter__char_class___range__48_57_char_class___range__47_47_conditional__iter__char_class___range__48_57__not_follow__char_class___range__48_57_ = (IConstructor) _read("prod(lex(\"Ratio\"),[opt(\\char-class([range(43,43),range(45,45)])),iter(\\char-class([range(48,57)])),\\char-class([range(47,47)]),conditional(iter(\\char-class([range(48,57)])),{\\not-follow(\\char-class([range(48,57)]))})],{})", Factory.Production);
-  private static final IConstructor prod__char_Form__Char_ = (IConstructor) _read("prod(label(\"char\",sort(\"Form\")),[lex(\"Char\")],{})", Factory.Production);
   private static final IConstructor regular__iter_star__char_class___range__0_9_range__11_12_range__14_16777215 = (IConstructor) _read("regular(\\iter-star(\\char-class([range(0,9),range(11,12),range(14,16777215)])))", Factory.Production);
   private static final IConstructor prod__Arg__conditional__char_class___range__37_37__not_follow__char_class___range__38_38_range__49_57_ = (IConstructor) _read("prod(lex(\"Arg\"),[conditional(\\char-class([range(37,37)]),{\\not-follow(\\char-class([range(38,38),range(49,57)]))})],{})", Factory.Production);
   private static final IConstructor prod__Symbol__Ident_lit___47_Ident_ = (IConstructor) _read("prod(lex(\"Symbol\"),[lex(\"Ident\"),lit(\"/\"),lex(\"Ident\")],{})", Factory.Production);
   private static final IConstructor prod__lit___35_123__char_class___range__35_35_char_class___range__123_123_ = (IConstructor) _read("prod(lit(\"#{\"),[\\char-class([range(35,35)]),\\char-class([range(123,123)])],{})", Factory.Production);
   private static final IConstructor prod__comment_WhitespaceOrComment__Comment_ = (IConstructor) _read("prod(label(\"comment\",sort(\"WhitespaceOrComment\")),[lex(\"Comment\")],{})", Factory.Production);
   private static final IConstructor prod__Stem__seq___conditional__char_class___range__33_33_range__38_38_range__42_43_range__46_46_range__60_63_range__65_90_range__95_95_range__97_122_range__124_124__not_precede__char_class___range__33_33_range__35_36_range__38_38_range__42_43_range__45_46_range__48_57_range__60_63_range__65_90_range__95_95_range__97_122_range__124_124_iter_star__char_class___range__33_33_range__35_36_range__38_38_range__42_43_range__45_46_range__48_57_range__60_63_range__65_90_range__95_95_range__97_122_range__124_124_conditional__iter__char_class___range__39_39__not_follow__char_class___range__39_39_ = (IConstructor) _read("prod(lex(\"Stem\"),[seq([conditional(\\char-class([range(33,33),range(38,38),range(42,43),range(46,46),range(60,63),range(65,90),range(95,95),range(97,122),range(124,124)]),{\\not-precede(\\char-class([range(33,33),range(35,36),range(38,38),range(42,43),range(45,46),range(48,57),range(60,63),range(65,90),range(95,95),range(97,122),range(124,124)]))}),\\iter-star(\\char-class([range(33,33),range(35,36),range(38,38),range(42,43),range(45,46),range(48,57),range(60,63),range(65,90),range(95,95),range(97,122),range(124,124)])),conditional(iter(\\char-class([range(39,39)])),{\\not-follow(\\char-class([range(39,39)]))})])],{})", Factory.Production);
-  private static final IConstructor prod__regexp_Form__RegExp_ = (IConstructor) _read("prod(label(\"regexp\",sort(\"Form\")),[lex(\"RegExp\")],{})", Factory.Production);
   private static final IConstructor prod__Symbol__conditional__lit___47__not_follow__char_class___range__33_33_range__38_38_range__42_43_range__45_46_range__58_58_range__60_63_range__65_90_range__95_95_range__97_122_range__124_124_not_precede__char_class___range__33_33_range__35_36_range__38_38_range__42_43_range__45_46_range__48_57_range__60_63_range__65_90_range__95_95_range__97_122_range__124_124_ = (IConstructor) _read("prod(lex(\"Symbol\"),[conditional(lit(\"/\"),{\\not-follow(\\char-class([range(33,33),range(38,38),range(42,43),range(45,46),range(58,58),range(60,63),range(65,90),range(95,95),range(97,122),range(124,124)])),\\not-precede(\\char-class([range(33,33),range(35,36),range(38,38),range(42,43),range(45,46),range(48,57),range(60,63),range(65,90),range(95,95),range(97,122),range(124,124)]))})],{})", Factory.Production);
   private static final IConstructor regular__iter__char_class___range__48_57_range__65_90_range__97_122 = (IConstructor) _read("regular(iter(\\char-class([range(48,57),range(65,90),range(97,122)])))", Factory.Production);
   private static final IConstructor regular__iter__char_class___range__48_57_range__65_70_range__97_102 = (IConstructor) _read("regular(iter(\\char-class([range(48,57),range(65,70),range(97,102)])))", Factory.Production);
@@ -110,8 +106,10 @@ public class ClojureParser extends org.rascalmpl.library.lang.rascal.syntax.Rasc
   private static final IConstructor regular__opt__char_class___range__48_57 = (IConstructor) _read("regular(opt(\\char-class([range(48,57)])))", Factory.Production);
   private static final IConstructor regular__seq___char_class___range__69_69_range__101_101_opt__char_class___range__43_43_range__45_45_conditional__iter__char_class___range__48_57__not_follow__char_class___range__48_57 = (IConstructor) _read("regular(seq([\\char-class([range(69,69),range(101,101)]),opt(\\char-class([range(43,43),range(45,45)])),conditional(iter(\\char-class([range(48,57)])),{\\not-follow(\\char-class([range(48,57)]))})]))", Factory.Production);
   private static final IConstructor prod__Char__char_class___range__92_92_lit_backspace_ = (IConstructor) _read("prod(lex(\"Char\"),[\\char-class([range(92,92)]),lit(\"backspace\")],{})", Factory.Production);
+  private static final IConstructor prod__number_Form__Number__tag__category___78_117_109_98_101_114 = (IConstructor) _read("prod(label(\"number\",sort(\"Form\")),[lex(\"Number\")],{tag(category(\"Number\"))})", Factory.Production);
   private static final IConstructor prod__Arg__char_class___range__37_37_char_class___range__38_38_ = (IConstructor) _read("prod(lex(\"Arg\"),[\\char-class([range(37,37)]),\\char-class([range(38,38)])],{})", Factory.Production);
   private static final IConstructor regular__opt__char_class___range__43_43_range__45_45 = (IConstructor) _read("regular(opt(\\char-class([range(43,43),range(45,45)])))", Factory.Production);
+  private static final IConstructor prod__symbol_Form__Symbol__tag__category___83_121_109_98_111_108 = (IConstructor) _read("prod(label(\"symbol\",sort(\"Form\")),[lex(\"Symbol\")],{tag(category(\"Symbol\"))})", Factory.Production);
   private static final IConstructor prod__lit___126_64__char_class___range__126_126_char_class___range__64_64_ = (IConstructor) _read("prod(lit(\"~@\"),[\\char-class([range(126,126)]),\\char-class([range(64,64)])],{})", Factory.Production);
   private static final IConstructor prod__lit_newline__char_class___range__110_110_char_class___range__101_101_char_class___range__119_119_char_class___range__108_108_char_class___range__105_105_char_class___range__110_110_char_class___range__101_101_ = (IConstructor) _read("prod(lit(\"newline\"),[\\char-class([range(110,110)]),\\char-class([range(101,101)]),\\char-class([range(119,119)]),\\char-class([range(108,108)]),\\char-class([range(105,105)]),\\char-class([range(110,110)]),\\char-class([range(101,101)])],{})", Factory.Production);
   private static final IConstructor regular__seq___conditional__char_class___range__45_45__not_precede__char_class___range__33_33_range__35_36_range__38_38_range__42_43_range__45_46_range__48_57_range__60_63_range__65_90_range__95_95_range__97_122_range__124_124_conditional__iter__char_class___range__39_39__not_follow__char_class___range__39_39 = (IConstructor) _read("regular(seq([conditional(\\char-class([range(45,45)]),{\\not-precede(\\char-class([range(33,33),range(35,36),range(38,38),range(42,43),range(45,46),range(48,57),range(60,63),range(65,90),range(95,95),range(97,122),range(124,124)]))}),conditional(iter(\\char-class([range(39,39)])),{\\not-follow(\\char-class([range(39,39)]))})]))", Factory.Production);
@@ -148,12 +146,14 @@ public class ClojureParser extends org.rascalmpl.library.lang.rascal.syntax.Rasc
   private static final IConstructor regular__iter__char_class___range__39_39 = (IConstructor) _read("regular(iter(\\char-class([range(39,39)])))", Factory.Production);
   private static final IConstructor prod__lit___94__char_class___range__94_94_ = (IConstructor) _read("prod(lit(\"^\"),[\\char-class([range(94,94)])],{})", Factory.Production);
   private static final IConstructor regular__seq___conditional__char_class___range__33_33_range__38_38_range__42_43_range__46_46_range__60_63_range__65_90_range__95_95_range__97_122_range__124_124__not_precede__char_class___range__33_33_range__35_36_range__38_38_range__42_43_range__45_46_range__48_57_range__60_63_range__65_90_range__95_95_range__97_122_range__124_124_conditional__iter_star__char_class___range__33_33_range__35_36_range__38_38_range__42_43_range__45_46_range__48_57_range__60_63_range__65_90_range__95_95_range__97_122_range__124_124__not_follow__char_class___range__33_33_range__35_36_range__38_39_range__42_43_range__45_46_range__48_57_range__60_63_range__65_90_range__95_95_range__97_122_range__124_124 = (IConstructor) _read("regular(seq([conditional(\\char-class([range(33,33),range(38,38),range(42,43),range(46,46),range(60,63),range(65,90),range(95,95),range(97,122),range(124,124)]),{\\not-precede(\\char-class([range(33,33),range(35,36),range(38,38),range(42,43),range(45,46),range(48,57),range(60,63),range(65,90),range(95,95),range(97,122),range(124,124)]))}),conditional(\\iter-star(\\char-class([range(33,33),range(35,36),range(38,38),range(42,43),range(45,46),range(48,57),range(60,63),range(65,90),range(95,95),range(97,122),range(124,124)])),{\\not-follow(\\char-class([range(33,33),range(35,36),range(38,39),range(42,43),range(45,46),range(48,57),range(60,63),range(65,90),range(95,95),range(97,122),range(124,124)]))})]))", Factory.Production);
+  private static final IConstructor prod__string_Form__String__tag__category___83_116_114_105_110_103 = (IConstructor) _read("prod(label(\"string\",sort(\"Form\")),[lex(\"String\")],{tag(category(\"String\"))})", Factory.Production);
   private static final IConstructor prod__StrChar__char_class___range__92_92_char_class___range__34_34_range__92_92_range__98_98_range__102_102_range__110_110_range__114_114_range__116_116_ = (IConstructor) _read("prod(lex(\"StrChar\"),[\\char-class([range(92,92)]),\\char-class([range(34,34),range(92,92),range(98,98),range(102,102),range(110,110),range(114,114),range(116,116)])],{})", Factory.Production);
   private static final IConstructor prod__fn_Form__lit___35_40_layouts_Standard_iter_star_seps__Form__layouts_Standard_layouts_Standard_lit___41_ = (IConstructor) _read("prod(label(\"fn\",sort(\"Form\")),[lit(\"#(\"),layouts(\"Standard\"),\\iter-star-seps(sort(\"Form\"),[layouts(\"Standard\")]),layouts(\"Standard\"),lit(\")\")],{})", Factory.Production);
   private static final IConstructor prod__lit___93__char_class___range__93_93_ = (IConstructor) _read("prod(lit(\"]\"),[\\char-class([range(93,93)])],{})", Factory.Production);
   private static final IConstructor prod__meta_Form__alt___lit___35_94_lit___94_layouts_Standard_meta_Form_layouts_Standard_arg_Form_ = (IConstructor) _read("prod(label(\"meta\",sort(\"Form\")),[alt({lit(\"#^\"),lit(\"^\")}),layouts(\"Standard\"),label(\"meta\",sort(\"Form\")),layouts(\"Standard\"),label(\"arg\",sort(\"Form\"))],{})", Factory.Production);
   private static final IConstructor prod__lit___35_39__char_class___range__35_35_char_class___range__39_39_ = (IConstructor) _read("prod(lit(\"#\\'\\\\\"),[\\char-class([range(35,35)]),\\char-class([range(39,39)])],{})", Factory.Production);
   private static final IConstructor prod__StrChar__char_class___range__92_92_char_class___range__117_117_char_class___range__48_57_range__65_70_range__97_102_char_class___range__48_57_range__65_70_range__97_102_char_class___range__48_57_range__65_70_range__97_102_char_class___range__48_57_range__65_70_range__97_102_ = (IConstructor) _read("prod(lex(\"StrChar\"),[\\char-class([range(92,92)]),\\char-class([range(117,117)]),\\char-class([range(48,57),range(65,70),range(97,102)]),\\char-class([range(48,57),range(65,70),range(97,102)]),\\char-class([range(48,57),range(65,70),range(97,102)]),\\char-class([range(48,57),range(65,70),range(97,102)])],{})", Factory.Production);
+  private static final IConstructor prod__char_Form__Char__tag__category___67_104_97_114 = (IConstructor) _read("prod(label(\"char\",sort(\"Form\")),[lex(\"Char\")],{tag(category(\"Char\"))})", Factory.Production);
   private static final IConstructor prod__lit___35_40__char_class___range__35_35_char_class___range__40_40_ = (IConstructor) _read("prod(lit(\"#(\"),[\\char-class([range(35,35)]),\\char-class([range(40,40)])],{})", Factory.Production);
   private static final IConstructor prod__Whitespace__char_class___range__9_10_range__12_13_range__32_32_range__44_44_ = (IConstructor) _read("prod(lex(\"Whitespace\"),[\\char-class([range(9,10),range(12,13),range(32,32),range(44,44)])],{})", Factory.Production);
   private static final IConstructor prod__Char__char_class___range__92_92_lit_newline_ = (IConstructor) _read("prod(lex(\"Char\"),[\\char-class([range(92,92)]),lit(\"newline\")],{})", Factory.Production);
@@ -180,11 +180,11 @@ public class ClojureParser extends org.rascalmpl.library.lang.rascal.syntax.Rasc
   private static final IConstructor prod__lit___126__char_class___range__126_126_ = (IConstructor) _read("prod(lit(\"~\"),[\\char-class([range(126,126)])],{})", Factory.Production);
   private static final IConstructor prod__lit___125__char_class___range__125_125_ = (IConstructor) _read("prod(lit(\"}\"),[\\char-class([range(125,125)])],{})", Factory.Production);
   private static final IConstructor prod__ratio_Number__Ratio_ = (IConstructor) _read("prod(label(\"ratio\",lex(\"Number\")),[lex(\"Ratio\")],{})", Factory.Production);
+  private static final IConstructor prod__regexp_Form__RegExp__tag__category___82_101_103_69_120_112 = (IConstructor) _read("prod(label(\"regexp\",sort(\"Form\")),[lex(\"RegExp\")],{tag(category(\"RegExp\"))})", Factory.Production);
   private static final IConstructor prod__Float__opt__char_class___range__43_43_range__45_45_FloatValue_opt__char_class___range__77_77_ = (IConstructor) _read("prod(lex(\"Float\"),[opt(\\char-class([range(43,43),range(45,45)])),lex(\"FloatValue\"),opt(\\char-class([range(77,77)]))],{})", Factory.Production);
   private static final IConstructor regular__seq___conditional__char_class___range__45_45__not_precede__char_class___range__33_33_range__35_36_range__38_38_range__42_43_range__45_46_range__48_57_range__60_63_range__65_90_range__95_95_range__97_122_range__124_124_iter_star__char_class___range__33_33_range__35_36_range__38_38_range__42_43_range__45_46_range__48_57_range__60_63_range__65_90_range__95_95_range__97_122_range__124_124_char_class___range__33_33_range__35_36_range__38_38_range__42_43_range__46_46_range__48_57_range__60_63_range__65_90_range__95_95_range__97_122_range__124_124_iter_star__char_class___range__33_33_range__35_36_range__38_38_range__42_43_range__45_46_range__48_57_range__60_63_range__65_90_range__95_95_range__97_122_range__124_124_conditional__iter__char_class___range__39_39__not_follow__char_class___range__39_39 = (IConstructor) _read("regular(seq([conditional(\\char-class([range(45,45)]),{\\not-precede(\\char-class([range(33,33),range(35,36),range(38,38),range(42,43),range(45,46),range(48,57),range(60,63),range(65,90),range(95,95),range(97,122),range(124,124)]))}),\\iter-star(\\char-class([range(33,33),range(35,36),range(38,38),range(42,43),range(45,46),range(48,57),range(60,63),range(65,90),range(95,95),range(97,122),range(124,124)])),\\char-class([range(33,33),range(35,36),range(38,38),range(42,43),range(46,46),range(48,57),range(60,63),range(65,90),range(95,95),range(97,122),range(124,124)]),\\iter-star(\\char-class([range(33,33),range(35,36),range(38,38),range(42,43),range(45,46),range(48,57),range(60,63),range(65,90),range(95,95),range(97,122),range(124,124)])),conditional(iter(\\char-class([range(39,39)])),{\\not-follow(\\char-class([range(39,39)]))})]))", Factory.Production);
   private static final IConstructor prod__Symbol__lit___58_58_Ident_ = (IConstructor) _read("prod(lex(\"Symbol\"),[lit(\"::\"),lex(\"Ident\")],{})", Factory.Production);
   private static final IConstructor prod__Stem__conditional__char_class___range__45_45__not_follow__char_class___range__33_33_range__35_36_range__38_39_range__42_43_range__45_46_range__48_57_range__60_63_range__65_90_range__95_95_range__97_122_range__124_124_not_precede__char_class___range__33_33_range__35_36_range__38_38_range__42_43_range__45_46_range__48_57_range__60_63_range__65_90_range__95_95_range__97_122_range__124_124_ = (IConstructor) _read("prod(lex(\"Stem\"),[conditional(\\char-class([range(45,45)]),{\\not-follow(\\char-class([range(33,33),range(35,36),range(38,39),range(42,43),range(45,46),range(48,57),range(60,63),range(65,90),range(95,95),range(97,122),range(124,124)])),\\not-precede(\\char-class([range(33,33),range(35,36),range(38,38),range(42,43),range(45,46),range(48,57),range(60,63),range(65,90),range(95,95),range(97,122),range(124,124)]))})],{})", Factory.Production);
-  private static final IConstructor prod__symbol_Form__Symbol_ = (IConstructor) _read("prod(label(\"symbol\",sort(\"Form\")),[lex(\"Symbol\")],{})", Factory.Production);
   private static final IConstructor prod__Char__char_class___range__92_92_char_class___range__0_7_range__11_11_range__14_31_range__33_16777215_ = (IConstructor) _read("prod(lex(\"Char\"),[\\char-class([range(92,92)]),\\char-class([range(0,7),range(11,11),range(14,31),range(33,16777215)])],{})", Factory.Production);
   private static final IConstructor prod__lit___58_58__char_class___range__58_58_char_class___range__58_58_ = (IConstructor) _read("prod(lit(\"::\"),[\\char-class([range(58,58)]),\\char-class([range(58,58)])],{})", Factory.Production);
   private static final IConstructor regular__iter_star__char_class___range__9_10_range__13_13_range__32_32 = (IConstructor) _read("regular(\\iter-star(\\char-class([range(9,10),range(13,13),range(32,32)])))", Factory.Production);
@@ -797,115 +797,115 @@ public class ClojureParser extends org.rascalmpl.library.lang.rascal.syntax.Rasc
       tmp[0] = new LiteralStackNode<IConstructor>(460, 0, prod__lit___64__char_class___range__64_64_, new int[] {64}, null, null);
       builder.addAlternative(ClojureParser.prod__deref_Form__lit___64_layouts_Standard_Form_, tmp);
 	}
+    protected static final void _init_prod__number_Form__Number__tag__category___78_117_109_98_101_114(ExpectBuilder<IConstructor> builder) {
+      AbstractStackNode<IConstructor>[] tmp = (AbstractStackNode<IConstructor>[]) new AbstractStackNode[1];
+      
+      tmp[0] = new NonTerminalStackNode<IConstructor>(468, 0, "Number", null, null);
+      builder.addAlternative(ClojureParser.prod__number_Form__Number__tag__category___78_117_109_98_101_114, tmp);
+	}
+    protected static final void _init_prod__string_Form__String__tag__category___83_116_114_105_110_103(ExpectBuilder<IConstructor> builder) {
+      AbstractStackNode<IConstructor>[] tmp = (AbstractStackNode<IConstructor>[]) new AbstractStackNode[1];
+      
+      tmp[0] = new NonTerminalStackNode<IConstructor>(466, 0, "String", null, null);
+      builder.addAlternative(ClojureParser.prod__string_Form__String__tag__category___83_116_114_105_110_103, tmp);
+	}
+    protected static final void _init_prod__regexp_Form__RegExp__tag__category___82_101_103_69_120_112(ExpectBuilder<IConstructor> builder) {
+      AbstractStackNode<IConstructor>[] tmp = (AbstractStackNode<IConstructor>[]) new AbstractStackNode[1];
+      
+      tmp[0] = new NonTerminalStackNode<IConstructor>(484, 0, "RegExp", null, null);
+      builder.addAlternative(ClojureParser.prod__regexp_Form__RegExp__tag__category___82_101_103_69_120_112, tmp);
+	}
     protected static final void _init_prod__fn_Form__lit___35_40_layouts_Standard_iter_star_seps__Form__layouts_Standard_layouts_Standard_lit___41_(ExpectBuilder<IConstructor> builder) {
       AbstractStackNode<IConstructor>[] tmp = (AbstractStackNode<IConstructor>[]) new AbstractStackNode[5];
       
-      tmp[4] = new LiteralStackNode<IConstructor>(478, 4, prod__lit___41__char_class___range__41_41_, new int[] {41}, null, null);
-      tmp[3] = new NonTerminalStackNode<IConstructor>(476, 3, "layouts_Standard", null, null);
-      tmp[2] = new SeparatedListStackNode<IConstructor>(470, 2, regular__iter_star_seps__Form__layouts_Standard, new NonTerminalStackNode<IConstructor>(472, 0, "Form", null, null), (AbstractStackNode<IConstructor>[]) new AbstractStackNode[]{new NonTerminalStackNode<IConstructor>(474, 1, "layouts_Standard", null, null)}, false, null, null);
-      tmp[1] = new NonTerminalStackNode<IConstructor>(468, 1, "layouts_Standard", null, null);
-      tmp[0] = new LiteralStackNode<IConstructor>(466, 0, prod__lit___35_40__char_class___range__35_35_char_class___range__40_40_, new int[] {35,40}, null, null);
+      tmp[4] = new LiteralStackNode<IConstructor>(482, 4, prod__lit___41__char_class___range__41_41_, new int[] {41}, null, null);
+      tmp[3] = new NonTerminalStackNode<IConstructor>(480, 3, "layouts_Standard", null, null);
+      tmp[2] = new SeparatedListStackNode<IConstructor>(474, 2, regular__iter_star_seps__Form__layouts_Standard, new NonTerminalStackNode<IConstructor>(476, 0, "Form", null, null), (AbstractStackNode<IConstructor>[]) new AbstractStackNode[]{new NonTerminalStackNode<IConstructor>(478, 1, "layouts_Standard", null, null)}, false, null, null);
+      tmp[1] = new NonTerminalStackNode<IConstructor>(472, 1, "layouts_Standard", null, null);
+      tmp[0] = new LiteralStackNode<IConstructor>(470, 0, prod__lit___35_40__char_class___range__35_35_char_class___range__40_40_, new int[] {35,40}, null, null);
       builder.addAlternative(ClojureParser.prod__fn_Form__lit___35_40_layouts_Standard_iter_star_seps__Form__layouts_Standard_layouts_Standard_lit___41_, tmp);
+	}
+    protected static final void _init_prod__symbol_Form__Symbol__tag__category___83_121_109_98_111_108(ExpectBuilder<IConstructor> builder) {
+      AbstractStackNode<IConstructor>[] tmp = (AbstractStackNode<IConstructor>[]) new AbstractStackNode[1];
+      
+      tmp[0] = new NonTerminalStackNode<IConstructor>(500, 0, "Symbol", null, null);
+      builder.addAlternative(ClojureParser.prod__symbol_Form__Symbol__tag__category___83_121_109_98_111_108, tmp);
 	}
     protected static final void _init_prod__meta_Form__alt___lit___35_94_lit___94_layouts_Standard_meta_Form_layouts_Standard_arg_Form_(ExpectBuilder<IConstructor> builder) {
       AbstractStackNode<IConstructor>[] tmp = (AbstractStackNode<IConstructor>[]) new AbstractStackNode[5];
       
-      tmp[4] = new NonTerminalStackNode<IConstructor>(492, 4, "Form", null, null);
-      tmp[3] = new NonTerminalStackNode<IConstructor>(490, 3, "layouts_Standard", null, null);
-      tmp[2] = new NonTerminalStackNode<IConstructor>(488, 2, "Form", null, null);
-      tmp[1] = new NonTerminalStackNode<IConstructor>(486, 1, "layouts_Standard", null, null);
-      tmp[0] = new AlternativeStackNode<IConstructor>(480, 0, regular__alt___lit___35_94_lit___94, (AbstractStackNode<IConstructor>[]) new AbstractStackNode[]{new LiteralStackNode<IConstructor>(482, 0, prod__lit___35_94__char_class___range__35_35_char_class___range__94_94_, new int[] {35,94}, null, null), new LiteralStackNode<IConstructor>(484, 0, prod__lit___94__char_class___range__94_94_, new int[] {94}, null, null)}, null, null);
+      tmp[4] = new NonTerminalStackNode<IConstructor>(498, 4, "Form", null, null);
+      tmp[3] = new NonTerminalStackNode<IConstructor>(496, 3, "layouts_Standard", null, null);
+      tmp[2] = new NonTerminalStackNode<IConstructor>(494, 2, "Form", null, null);
+      tmp[1] = new NonTerminalStackNode<IConstructor>(492, 1, "layouts_Standard", null, null);
+      tmp[0] = new AlternativeStackNode<IConstructor>(486, 0, regular__alt___lit___35_94_lit___94, (AbstractStackNode<IConstructor>[]) new AbstractStackNode[]{new LiteralStackNode<IConstructor>(488, 0, prod__lit___35_94__char_class___range__35_35_char_class___range__94_94_, new int[] {35,94}, null, null), new LiteralStackNode<IConstructor>(490, 0, prod__lit___94__char_class___range__94_94_, new int[] {94}, null, null)}, null, null);
       builder.addAlternative(ClojureParser.prod__meta_Form__alt___lit___35_94_lit___94_layouts_Standard_meta_Form_layouts_Standard_arg_Form_, tmp);
 	}
-    protected static final void _init_prod__string_Form__String_(ExpectBuilder<IConstructor> builder) {
+    protected static final void _init_prod__char_Form__Char__tag__category___67_104_97_114(ExpectBuilder<IConstructor> builder) {
       AbstractStackNode<IConstructor>[] tmp = (AbstractStackNode<IConstructor>[]) new AbstractStackNode[1];
       
-      tmp[0] = new NonTerminalStackNode<IConstructor>(494, 0, "String", null, null);
-      builder.addAlternative(ClojureParser.prod__string_Form__String_, tmp);
+      tmp[0] = new NonTerminalStackNode<IConstructor>(502, 0, "Char", null, null);
+      builder.addAlternative(ClojureParser.prod__char_Form__Char__tag__category___67_104_97_114, tmp);
 	}
     protected static final void _init_prod__qquote_Form__lit___96_layouts_Standard_arg_Form_(ExpectBuilder<IConstructor> builder) {
       AbstractStackNode<IConstructor>[] tmp = (AbstractStackNode<IConstructor>[]) new AbstractStackNode[3];
       
-      tmp[0] = new LiteralStackNode<IConstructor>(498, 0, prod__lit___96__char_class___range__96_96_, new int[] {96}, null, null);
-      tmp[1] = new NonTerminalStackNode<IConstructor>(500, 1, "layouts_Standard", null, null);
-      tmp[2] = new NonTerminalStackNode<IConstructor>(502, 2, "Form", null, null);
+      tmp[2] = new NonTerminalStackNode<IConstructor>(508, 2, "Form", null, null);
+      tmp[1] = new NonTerminalStackNode<IConstructor>(506, 1, "layouts_Standard", null, null);
+      tmp[0] = new LiteralStackNode<IConstructor>(504, 0, prod__lit___96__char_class___range__96_96_, new int[] {96}, null, null);
       builder.addAlternative(ClojureParser.prod__qquote_Form__lit___96_layouts_Standard_arg_Form_, tmp);
-	}
-    protected static final void _init_prod__number_Form__Number_(ExpectBuilder<IConstructor> builder) {
-      AbstractStackNode<IConstructor>[] tmp = (AbstractStackNode<IConstructor>[]) new AbstractStackNode[1];
-      
-      tmp[0] = new NonTerminalStackNode<IConstructor>(496, 0, "Number", null, null);
-      builder.addAlternative(ClojureParser.prod__number_Form__Number_, tmp);
 	}
     protected static final void _init_prod__unquotes_Form__lit___126_64_layouts_Standard_arg_Form_(ExpectBuilder<IConstructor> builder) {
       AbstractStackNode<IConstructor>[] tmp = (AbstractStackNode<IConstructor>[]) new AbstractStackNode[3];
       
-      tmp[2] = new NonTerminalStackNode<IConstructor>(508, 2, "Form", null, null);
-      tmp[1] = new NonTerminalStackNode<IConstructor>(506, 1, "layouts_Standard", null, null);
-      tmp[0] = new LiteralStackNode<IConstructor>(504, 0, prod__lit___126_64__char_class___range__126_126_char_class___range__64_64_, new int[] {126,64}, null, null);
+      tmp[2] = new NonTerminalStackNode<IConstructor>(514, 2, "Form", null, null);
+      tmp[1] = new NonTerminalStackNode<IConstructor>(512, 1, "layouts_Standard", null, null);
+      tmp[0] = new LiteralStackNode<IConstructor>(510, 0, prod__lit___126_64__char_class___range__126_126_char_class___range__64_64_, new int[] {126,64}, null, null);
       builder.addAlternative(ClojureParser.prod__unquotes_Form__lit___126_64_layouts_Standard_arg_Form_, tmp);
-	}
-    protected static final void _init_prod__symbol_Form__Symbol_(ExpectBuilder<IConstructor> builder) {
-      AbstractStackNode<IConstructor>[] tmp = (AbstractStackNode<IConstructor>[]) new AbstractStackNode[1];
-      
-      tmp[0] = new NonTerminalStackNode<IConstructor>(510, 0, "Symbol", null, null);
-      builder.addAlternative(ClojureParser.prod__symbol_Form__Symbol_, tmp);
 	}
     protected static final void _init_prod__vector_Form__lit___91_layouts_Standard_iter_star_seps__Form__layouts_Standard_layouts_Standard_lit___93_(ExpectBuilder<IConstructor> builder) {
       AbstractStackNode<IConstructor>[] tmp = (AbstractStackNode<IConstructor>[]) new AbstractStackNode[5];
       
-      tmp[4] = new LiteralStackNode<IConstructor>(524, 4, prod__lit___93__char_class___range__93_93_, new int[] {93}, null, null);
-      tmp[3] = new NonTerminalStackNode<IConstructor>(522, 3, "layouts_Standard", null, null);
-      tmp[2] = new SeparatedListStackNode<IConstructor>(516, 2, regular__iter_star_seps__Form__layouts_Standard, new NonTerminalStackNode<IConstructor>(518, 0, "Form", null, null), (AbstractStackNode<IConstructor>[]) new AbstractStackNode[]{new NonTerminalStackNode<IConstructor>(520, 1, "layouts_Standard", null, null)}, false, null, null);
-      tmp[1] = new NonTerminalStackNode<IConstructor>(514, 1, "layouts_Standard", null, null);
-      tmp[0] = new LiteralStackNode<IConstructor>(512, 0, prod__lit___91__char_class___range__91_91_, new int[] {91}, null, null);
+      tmp[4] = new LiteralStackNode<IConstructor>(528, 4, prod__lit___93__char_class___range__93_93_, new int[] {93}, null, null);
+      tmp[3] = new NonTerminalStackNode<IConstructor>(526, 3, "layouts_Standard", null, null);
+      tmp[2] = new SeparatedListStackNode<IConstructor>(520, 2, regular__iter_star_seps__Form__layouts_Standard, new NonTerminalStackNode<IConstructor>(522, 0, "Form", null, null), (AbstractStackNode<IConstructor>[]) new AbstractStackNode[]{new NonTerminalStackNode<IConstructor>(524, 1, "layouts_Standard", null, null)}, false, null, null);
+      tmp[1] = new NonTerminalStackNode<IConstructor>(518, 1, "layouts_Standard", null, null);
+      tmp[0] = new LiteralStackNode<IConstructor>(516, 0, prod__lit___91__char_class___range__91_91_, new int[] {91}, null, null);
       builder.addAlternative(ClojureParser.prod__vector_Form__lit___91_layouts_Standard_iter_star_seps__Form__layouts_Standard_layouts_Standard_lit___93_, tmp);
 	}
     protected static final void _init_prod__var_Form__lit___35_39_layouts_Standard_Form_(ExpectBuilder<IConstructor> builder) {
       AbstractStackNode<IConstructor>[] tmp = (AbstractStackNode<IConstructor>[]) new AbstractStackNode[3];
       
-      tmp[2] = new NonTerminalStackNode<IConstructor>(530, 2, "Form", null, null);
-      tmp[1] = new NonTerminalStackNode<IConstructor>(528, 1, "layouts_Standard", null, null);
-      tmp[0] = new LiteralStackNode<IConstructor>(526, 0, prod__lit___35_39__char_class___range__35_35_char_class___range__39_39_, new int[] {35,39}, null, null);
+      tmp[2] = new NonTerminalStackNode<IConstructor>(534, 2, "Form", null, null);
+      tmp[1] = new NonTerminalStackNode<IConstructor>(532, 1, "layouts_Standard", null, null);
+      tmp[0] = new LiteralStackNode<IConstructor>(530, 0, prod__lit___35_39__char_class___range__35_35_char_class___range__39_39_, new int[] {35,39}, null, null);
       builder.addAlternative(ClojureParser.prod__var_Form__lit___35_39_layouts_Standard_Form_, tmp);
 	}
     protected static final void _init_prod__quote_Form__lit___39_layouts_Standard_arg_Form_(ExpectBuilder<IConstructor> builder) {
       AbstractStackNode<IConstructor>[] tmp = (AbstractStackNode<IConstructor>[]) new AbstractStackNode[3];
       
-      tmp[2] = new NonTerminalStackNode<IConstructor>(536, 2, "Form", null, null);
-      tmp[1] = new NonTerminalStackNode<IConstructor>(534, 1, "layouts_Standard", null, null);
-      tmp[0] = new LiteralStackNode<IConstructor>(532, 0, prod__lit___39__char_class___range__39_39_, new int[] {39}, null, null);
+      tmp[2] = new NonTerminalStackNode<IConstructor>(540, 2, "Form", null, null);
+      tmp[1] = new NonTerminalStackNode<IConstructor>(538, 1, "layouts_Standard", null, null);
+      tmp[0] = new LiteralStackNode<IConstructor>(536, 0, prod__lit___39__char_class___range__39_39_, new int[] {39}, null, null);
       builder.addAlternative(ClojureParser.prod__quote_Form__lit___39_layouts_Standard_arg_Form_, tmp);
-	}
-    protected static final void _init_prod__char_Form__Char_(ExpectBuilder<IConstructor> builder) {
-      AbstractStackNode<IConstructor>[] tmp = (AbstractStackNode<IConstructor>[]) new AbstractStackNode[1];
-      
-      tmp[0] = new NonTerminalStackNode<IConstructor>(538, 0, "Char", null, null);
-      builder.addAlternative(ClojureParser.prod__char_Form__Char_, tmp);
 	}
     protected static final void _init_prod__discard_Form__lit___35_95_layouts_Standard_Form_(ExpectBuilder<IConstructor> builder) {
       AbstractStackNode<IConstructor>[] tmp = (AbstractStackNode<IConstructor>[]) new AbstractStackNode[3];
       
-      tmp[2] = new NonTerminalStackNode<IConstructor>(544, 2, "Form", null, null);
-      tmp[1] = new NonTerminalStackNode<IConstructor>(542, 1, "layouts_Standard", null, null);
-      tmp[0] = new LiteralStackNode<IConstructor>(540, 0, prod__lit___35_95__char_class___range__35_35_char_class___range__95_95_, new int[] {35,95}, null, null);
+      tmp[2] = new NonTerminalStackNode<IConstructor>(546, 2, "Form", null, null);
+      tmp[1] = new NonTerminalStackNode<IConstructor>(544, 1, "layouts_Standard", null, null);
+      tmp[0] = new LiteralStackNode<IConstructor>(542, 0, prod__lit___35_95__char_class___range__35_35_char_class___range__95_95_, new int[] {35,95}, null, null);
       builder.addAlternative(ClojureParser.prod__discard_Form__lit___35_95_layouts_Standard_Form_, tmp);
 	}
     protected static final void _init_prod__list_Form__lit___40_layouts_Standard_iter_star_seps__Form__layouts_Standard_layouts_Standard_lit___41_(ExpectBuilder<IConstructor> builder) {
       AbstractStackNode<IConstructor>[] tmp = (AbstractStackNode<IConstructor>[]) new AbstractStackNode[5];
       
-      tmp[4] = new LiteralStackNode<IConstructor>(558, 4, prod__lit___41__char_class___range__41_41_, new int[] {41}, null, null);
-      tmp[3] = new NonTerminalStackNode<IConstructor>(556, 3, "layouts_Standard", null, null);
-      tmp[2] = new SeparatedListStackNode<IConstructor>(550, 2, regular__iter_star_seps__Form__layouts_Standard, new NonTerminalStackNode<IConstructor>(552, 0, "Form", null, null), (AbstractStackNode<IConstructor>[]) new AbstractStackNode[]{new NonTerminalStackNode<IConstructor>(554, 1, "layouts_Standard", null, null)}, false, null, null);
-      tmp[1] = new NonTerminalStackNode<IConstructor>(548, 1, "layouts_Standard", null, null);
-      tmp[0] = new LiteralStackNode<IConstructor>(546, 0, prod__lit___40__char_class___range__40_40_, new int[] {40}, null, null);
+      tmp[4] = new LiteralStackNode<IConstructor>(560, 4, prod__lit___41__char_class___range__41_41_, new int[] {41}, null, null);
+      tmp[3] = new NonTerminalStackNode<IConstructor>(558, 3, "layouts_Standard", null, null);
+      tmp[2] = new SeparatedListStackNode<IConstructor>(552, 2, regular__iter_star_seps__Form__layouts_Standard, new NonTerminalStackNode<IConstructor>(554, 0, "Form", null, null), (AbstractStackNode<IConstructor>[]) new AbstractStackNode[]{new NonTerminalStackNode<IConstructor>(556, 1, "layouts_Standard", null, null)}, false, null, null);
+      tmp[1] = new NonTerminalStackNode<IConstructor>(550, 1, "layouts_Standard", null, null);
+      tmp[0] = new LiteralStackNode<IConstructor>(548, 0, prod__lit___40__char_class___range__40_40_, new int[] {40}, null, null);
       builder.addAlternative(ClojureParser.prod__list_Form__lit___40_layouts_Standard_iter_star_seps__Form__layouts_Standard_layouts_Standard_lit___41_, tmp);
-	}
-    protected static final void _init_prod__regexp_Form__RegExp_(ExpectBuilder<IConstructor> builder) {
-      AbstractStackNode<IConstructor>[] tmp = (AbstractStackNode<IConstructor>[]) new AbstractStackNode[1];
-      
-      tmp[0] = new NonTerminalStackNode<IConstructor>(560, 0, "RegExp", null, null);
-      builder.addAlternative(ClojureParser.prod__regexp_Form__RegExp_, tmp);
 	}
     protected static final void _init_prod__arg_Form__Arg_(ExpectBuilder<IConstructor> builder) {
       AbstractStackNode<IConstructor>[] tmp = (AbstractStackNode<IConstructor>[]) new AbstractStackNode[1];
@@ -938,19 +938,23 @@ public class ClojureParser extends org.rascalmpl.library.lang.rascal.syntax.Rasc
       
         _init_prod__deref_Form__lit___64_layouts_Standard_Form_(builder);
       
+        _init_prod__number_Form__Number__tag__category___78_117_109_98_101_114(builder);
+      
+        _init_prod__string_Form__String__tag__category___83_116_114_105_110_103(builder);
+      
+        _init_prod__regexp_Form__RegExp__tag__category___82_101_103_69_120_112(builder);
+      
         _init_prod__fn_Form__lit___35_40_layouts_Standard_iter_star_seps__Form__layouts_Standard_layouts_Standard_lit___41_(builder);
+      
+        _init_prod__symbol_Form__Symbol__tag__category___83_121_109_98_111_108(builder);
       
         _init_prod__meta_Form__alt___lit___35_94_lit___94_layouts_Standard_meta_Form_layouts_Standard_arg_Form_(builder);
       
-        _init_prod__string_Form__String_(builder);
+        _init_prod__char_Form__Char__tag__category___67_104_97_114(builder);
       
         _init_prod__qquote_Form__lit___96_layouts_Standard_arg_Form_(builder);
       
-        _init_prod__number_Form__Number_(builder);
-      
         _init_prod__unquotes_Form__lit___126_64_layouts_Standard_arg_Form_(builder);
-      
-        _init_prod__symbol_Form__Symbol_(builder);
       
         _init_prod__vector_Form__lit___91_layouts_Standard_iter_star_seps__Form__layouts_Standard_layouts_Standard_lit___93_(builder);
       
@@ -958,13 +962,9 @@ public class ClojureParser extends org.rascalmpl.library.lang.rascal.syntax.Rasc
       
         _init_prod__quote_Form__lit___39_layouts_Standard_arg_Form_(builder);
       
-        _init_prod__char_Form__Char_(builder);
-      
         _init_prod__discard_Form__lit___35_95_layouts_Standard_Form_(builder);
       
         _init_prod__list_Form__lit___40_layouts_Standard_iter_star_seps__Form__layouts_Standard_layouts_Standard_lit___41_(builder);
-      
-        _init_prod__regexp_Form__RegExp_(builder);
       
         _init_prod__arg_Form__Arg_(builder);
       
