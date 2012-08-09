@@ -35,23 +35,27 @@ public class Bridge2Rascal {
 
 	
 	public Bridge2Rascal(IValueFactory values) {
-		this(values, URI.create("file://" + System.getProperty("user.dir") + "/src"));
+		this(values, getEvaluator(values, URI.create("file://" + System.getProperty("user.dir") + "/src")));
 	}
 	
-	public Bridge2Rascal(IValueFactory values, URI uri) {
-		PKG = values.string("lang.synclj.object.parsers");
-		cache = new HashMap<IConstructor, Class<IGTD<IConstructor,IConstructor,ISourceLocation>>>();
-		vf = values;
+	private static Evaluator getEvaluator(IValueFactory values, URI uri) {
 		GlobalEnvironment heap = new GlobalEnvironment();
 		ModuleEnvironment scope = new ModuleEnvironment(
 				"___parsergenerator_synclj___", heap);
 		PrintWriter out = new PrintWriter(System.out);
-		this.evaluator = new Evaluator(values, out, out, scope, heap);
+		Evaluator eval = new Evaluator(values, out, out, scope, heap);
+		eval.addRascalSearchPath(uri);
+		return eval;
+	}
+
+	public Bridge2Rascal(IValueFactory values, Evaluator eval) {
+		PKG = values.string("lang.synclj.object.parsers");
+		cache = new HashMap<IConstructor, Class<IGTD<IConstructor,IConstructor,ISourceLocation>>>();
+		vf = values;
+		this.evaluator = eval;
 		this.bridge = new JavaBridge(evaluator.getClassLoaders(), values);
 		IRascalMonitor monitor = this.evaluator;
 		monitor.startJob("Loading parser generator", 100, 139);
-
-		evaluator.addRascalSearchPath(uri);
 		try {
 			evaluator.doImport(monitor, "lang::rascal::grammar::ParserGenerator");
 			evaluator.doImport(monitor, "ebnf::lang::NodeToGrammar");
